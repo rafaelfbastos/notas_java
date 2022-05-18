@@ -36,7 +36,7 @@ public class Turma {
             if (aluno.getMedia() >= 7) {
                 nAprovados++;
             } else {
-                nAprovados++;
+                nReprovados++;
             }
         }
         mediaNota1 = media1 / turma.size();
