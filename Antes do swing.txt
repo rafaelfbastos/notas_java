@@ -1,0 +1,45 @@
+float nota1, nota2, nota3;
+        String nome;
+
+        Turma turma = new Turma();
+
+        Scanner entrada = new Scanner(System.in);
+        Scanner entrada2 = new Scanner(System.in);
+
+        new JanelaCadastro();
+
+        while (true) {
+            System.out.println("Digite o nome do aluno: (ou digite sair)");
+            nome = entrada.nextLine();
+            if (nome.toLowerCase().equals("sair")) {
+                break;
+            }
+            System.out.println("Digite a nota 1:");
+            nota1 = entrada2.nextInt();
+            System.out.println("Digite a nota 2:");
+            nota2 = entrada2.nextInt();
+            System.out.println("Digite a nota 3:");
+            nota3 = entrada2.nextInt();
+
+            Aluno aluno = new Aluno(nome, nota1, nota2, nota3);
+            turma.addAluno(aluno);
+
+            System.out.println("");
+
+        }
+
+        for (Aluno a : turma.getTurma()) {
+            System.out.println(a.toString());
+        }
+
+        turma.calcularMedias();
+
+        System.out.println("Medias da Turma");
+        System.out.println("───────────────────────────────");
+        System.out.printf("Nota 1 = %.1f\n", turma.getMediaNota1());
+        System.out.printf("Nota 2 = %.1f\n", turma.getMediaNota2());
+        System.out.printf("Nota 3 = %.1f\n", turma.getMediaNota3());
+        System.out.printf("Nota Global = %.1f\n", turma.getMediaGlobal());
+
+        GravarJson salvar = new GravarJson(turma.getTurma());
+        salvar.gravar();
