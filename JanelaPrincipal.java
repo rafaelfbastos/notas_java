@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,7 @@ public class JanelaPrincipal extends JFrame {
 
     private JPanel headerPanel, turmaPanel, botPanel;
     private JButton cadastrar, salvar;
-    private JLabel media1, media2, media3, mediaG;
+    private JLabel media1, media2, media3, mediaG, aprovados, reprovados;
 
     public JanelaPrincipal(){
         super();
@@ -95,6 +97,23 @@ public class JanelaPrincipal extends JFrame {
         mediaG.setAlignmentX(Component.CENTER_ALIGNMENT);
         turmaPanel.add(mediaG);
 
+        JPanel caixa = new JPanel();
+        caixa.setLayout(new BoxLayout(caixa,BoxLayout.Y_AXIS));
+        caixa.add(Box.createRigidArea(new Dimension(130, 5)));
+        Border raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
+        caixa.setBorder(raisedetched);
+        aprovados = new JLabel(String.format("Aprovados » %d", Main.turma.getnAprovados()));
+        aprovados.setAlignmentX(Component.CENTER_ALIGNMENT);
+        caixa.add(aprovados);
+        reprovados = new JLabel(String.format("Reprovados » %d", Main.turma.getnReprovados()));
+        reprovados.setAlignmentX(Component.CENTER_ALIGNMENT);
+        caixa.add(reprovados);
+        caixa.add(Box.createRigidArea(new Dimension(130, 5)));
+        turmaPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        turmaPanel.add(caixa);
+
+
+
     }
 
     public void atualizar(){
@@ -103,6 +122,8 @@ public class JanelaPrincipal extends JFrame {
         media1.setText(String.format("Media nota 1 = %.1f", Main.turma.getMediaNota1()));
         media2.setText(String.format("Media nota 2 = %.1f", Main.turma.getMediaNota2()));
         media3.setText(String.format("Media nota 3 = %.1f", Main.turma.getMediaNota3()));
+        aprovados.setText(String.format("Aprovados » %d", Main.turma.getnAprovados()));
+        reprovados.setText(String.format("Reprovados » %d", Main.turma.getnReprovados()));
 
     }
 }
